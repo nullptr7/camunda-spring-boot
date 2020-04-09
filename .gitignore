@@ -1,2 +1,41 @@
 # Project exclude paths
-/target/
+### Git Ignore 0
+# Ignored files and folders will not be committed, but may be modified during pull or commit.
+
+
+# Java class files
+*.class
+*.classpath
+.project
+
+# Package files
+*.ear
+*.exe
+*.jar
+*.war
+*.zip
+*.iml
+
+# Gradle files
+.gradle/
+build/
+target/
+wrapper/
+.idea/
+.settings/
+
+# Generated files
+git/
+out/
+
+# Dependency libraries
+lib/
+
+# Log files
+logs/
+*.log
+
+# Temp files
+tmp/
+/.apt_generated/
+src/main/generated
