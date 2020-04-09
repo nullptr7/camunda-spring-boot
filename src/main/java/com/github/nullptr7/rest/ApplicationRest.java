@@ -1,4 +1,4 @@
-package com.github.nulptr7.rest;
+package com.github.nullptr7.rest;
 
 import org.camunda.bpm.engine.rest.impl.CamundaRestResources;
 

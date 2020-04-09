@@ -1,0 +1,447 @@
+GET http://localhost:8080/rest/history/detail
+Content-Type: application/json
+
+<> 2020-04-10T010821.200.json
+
+###
+
+GET http://localhost:8080/rest/history/detail
+Content-Type: application/json
+
+<> 2020-04-10T010104.200.json
+
+###
+
+GET http://localhost:8080/rest/history/activity-instance
+Content-Type: application/json
+
+<> 2020-04-10T125937.200.json
+
+###
+
+POST http://localhost:8080/rest/task/031dbe4e-7a98-11ea-8ef9-94b86dcfb2b8/submit-form
+Content-Type: application/json
+
+{
+  "variables": {
+    "comments": {
+      "value": "Approving this for now - Ishan"
+    },
+    "approved": {
+      "value": true
+    }
+  }
+}
+
+###
+
+GET http://localhost:8080/rest/task?assignee=nullptr
+
+Content-Type: application/json
+
+<> 2020-04-10T125837.200.json
+
+###
+
+POST http://localhost:8080/rest/task/b382111d-7a96-11ea-8ef9-94b86dcfb2b8/submit-form
+Content-Type: application/json
+
+{
+  "variables": {
+    "comments": {
+      "value": "Rejecting this for now - Ishan"
+    },
+    "approved": {
+      "value": false
+    }
+  }
+}
+
+###
+
+GET http://localhost:8080/rest/task?assignee=nullptr
+
+Content-Type: application/json
+
+<> 2020-04-10T125816.200.json
+
+###
+
+POST http://localhost:8080/rest/task/db600f86-7a96-11ea-8ef9-94b86dcfb2b8/submit-form
+Content-Type: application/json
+
+{
+  "variables": {
+    "comments": {
+      "value": "Rejecting this for now - Ishan"
+    },
+    "approved": {
+      "value": false
+    }
+  }
+}
+
+###
+
+GET http://localhost:8080/rest/task?assignee=nullptr
+
+Content-Type: application/json
+
+<> 2020-04-10T125750.200.json
+
+###
+
+POST http://localhost:8080/rest/task/f2cf6576-7a97-11ea-8ef9-94b86dcfb2b8/submit-form
+Content-Type: application/json
+
+{
+  "variables": {
+    "comments": {
+      "value": "Approving this for now - Ishan"
+    },
+    "approved": {
+      "value": true
+    }
+  }
+}
+
+###
+
+GET http://localhost:8080/rest/task?assignee=nullptr
+
+Content-Type: application/json
+
+<> 2020-04-10T125702.200.json
+
+###
+
+POST http://localhost:8080/rest/engine/default/process-definition/message_demo:1:2ce5f768-7a8c-11ea-8ef9-94b86dcfb2b8/submit-form?latest=true&active=true&startableInTasklist=true&startablePermissionCheck=true&firstResult=0&maxResults=15
+Content-Type: application/json
+
+{
+  "businessKey": "sender_6",
+  "variables": {
+    "content": {
+      "value": "Some content sent by sender_6 Ishan",
+      "type": "String"
+    }
+  }
+}
+
+<> 2020-04-10T125629.200.json
+
+###
+
+POST http://localhost:8080/rest/engine/default/process-definition/message_demo:1:2ce5f768-7a8c-11ea-8ef9-94b86dcfb2b8/submit-form?latest=true&active=true&startableInTasklist=true&startablePermissionCheck=true&firstResult=0&maxResults=15
+Content-Type: application/json
+
+{
+  "businessKey": "sender_5",
+  "variables": {
+    "content": {
+      "value": "Some content sent by sender_5",
+      "type": "String"
+    }
+  }
+}
+
+<> 2020-04-10T125602.200.json
+
+###
+
+GET http://localhost:8080/rest/task?assignee=nullptr
+
+Content-Type: application/json
+
+<> 2020-04-10T124716.200.json
+
+###
+
+POST http://localhost:8080/rest/engine/default/process-definition/message_demo:1:2ce5f768-7a8c-11ea-8ef9-94b86dcfb2b8/submit-form?latest=true&active=true&startableInTasklist=true&startablePermissionCheck=true&firstResult=0&maxResults=15
+Content-Type: application/json
+
+{
+  "businessKey": "sender_3",
+  "variables": {
+    "content": {
+      "value": "Some content sent by sender_3",
+      "type": "String"
+    }
+  }
+}
+
+<> 2020-04-10T124706.200.json
+
+###
+
+POST http://localhost:8080/rest/task/73fae082-7a8d-11ea-8ef9-94b86dcfb2b8/submit-form
+Content-Type: application/json
+
+{
+  "variables": {
+    "comments": {
+      "value": "Approving this for now - Ishan"
+    },
+    "approved": {
+      "value": true
+    }
+  }
+}
+
+###
+
+GET http://localhost:8080/rest/task?assignee=nullptr
+Content-Type: application/json
+
+<> 2020-04-10T121906.200.json
+
+###
+
+GET http://localhost:8080/rest/task/73fae082-7a8d-11ea-8ef9-94b86dcfb2b8
+Content-Type: application/json
+
+<> 2020-04-10T121850.200.json
+
+###
+
+GET http://localhost:8080/rest/task?assignee=nullptr
+Content-Type: application/json
+
+<> 2020-04-10T121553.200.json
+
+###
+
+GET http://localhost:8080/rest/task?assignee=nullptr1
+Content-Type: application/json
+
+<> 2020-04-10T121549.200.json
+
+###
+
+GET http://localhost:8080/rest/task?assigne=nullptr1
+Content-Type: application/json
+
+<> 2020-04-10T121536.200.json
+
+###
+
+GET http://localhost:8080/rest/task?assigne=nullptr
+Content-Type: application/json
+
+<> 2020-04-10T121530.200.json
+
+###
+
+GET http://localhost:8080/rest/task
+Content-Type: application/json
+
+<> 2020-04-10T121414.200.json
+
+###
+
+POST http://localhost:8080/rest/engine/default/filter/56f83af0-7a8c-11ea-8ef9-94b86dcfb2b8/list?firstResult=0&maxResults=15
+Content-Type: application/json
+
+{
+  "processVariables": [],
+  "taskVariables": [],
+  "caseInstanceVariables": [],
+  "firstResult": 0,
+  "maxResults": 15,
+  "sorting": [
+    {
+      "sortBy": "created",
+      "sortOrder": "desc"
+    }
+  ],
+  "active": true
+}
+
+<> 2020-04-10T120927.200.json
+
+###
+
+GET http://localhost:8080/rest/engine/default/task/a48c2054-7a8f-11ea-8ef9-94b86dcfb2b8
+Content-Type: application/json
+
+<> 2020-04-10T120255.200.json
+
+###
+
+POST http://localhost:8080/rest/engine/default/process-definition/message_demo:1:2ce5f768-7a8c-11ea-8ef9-94b86dcfb2b8/submit-form?latest=true&active=true&startableInTasklist=true&startablePermissionCheck=true&firstResult=0&maxResults=15
+Content-Type: application/json
+
+{   "businessKey": "sender_2",   "variables": {     "content": {       "value": "Some content sent by sender_2",       "type": "String"     }   } }
+
+<> 2020-04-09T115634.200.json
+
+###
+
+POST http://localhost:8080/api/engine/engine/default/process-definition/message_demo:1:2ce5f768-7a8c-11ea-8ef9-94b86dcfb2b8/submit-form?latest=true&active=true&startableInTasklist=true&startablePermissionCheck=true&firstResult=0&maxResults=15
+Content-Type: application/json
+
+{   "businessKey": "sender_2",   "variables": {     "content": {       "value": "Some content sent by sender_2",       "type": "String"     }   } }
+
+<> 2020-04-09T115617.401.json
+
+###
+
+GET http://localhost:8080/rest/engine/default/process-definition?latest=true&active=true&startableInTasklist=true&startablePermissionCheck=true&firstResult=0&maxResults=15
+Content-Type: application/json
+
+<> 2020-04-09T115113.200.json
+
+###
+
+GET http://localhost:8080/api/engine/engine/default/process-definition?latest=true&active=true&startableInTasklist=true&startablePermissionCheck=true&firstResult=0&maxResults=15
+Content-Type: application/json
+
+<> 2020-04-09T115053.401.json
+
+###
+
+GET http://localhost:8080/rest/process-definition
+Content-Type: application/json
+
+<> 2020-04-09T113723.200.json
+
+###
+
+GET http://localhost:8080/rest/task
+Content-Type: application/json
+
+<> 2020-04-09T113637.200.json
+
+###
+
+POST http://localhost:8080/rest/task/create
+Content-Type: application/json
+
+{   "id": "aTaskId1",   "name": "My Task",   "description": "This have to be done very urgent",   "priority" : 30,   "assignee" : "nullptr",   "owner" : "nullptr",   "delegationState" : "PENDING",   "taskDefinitionKey": "say-hello",   "due" : "2014-08-30T10:00:00.000+0200",   "followUp" : "2014-08-25T10:00:00.000+0200",   "caseInstanceId" : "aCaseInstanceId",   "tenantId" : null }
+
+###
+
+GET http://localhost:8080/rest/task
+Content-Type: application/json
+
+<> 2020-04-08T042912.200.json
+
+###
+
+POST http://localhost:8080/rest/task/create
+Content-Type: application/json
+
+{   "id": "aTaskId",   "name": "My Task",   "description": "This have to be done very urgent",   "priority" : 30,   "assignee" : "nullptr",   "owner" : "nullptr",   "delegationState" : "PENDING",   "due" : "2014-08-30T10:00:00.000+0200",   "followUp" : "2014-08-25T10:00:00.000+0200",   "caseInstanceId" : "aCaseInstanceId",   "tenantId" : null }
+
+###
+
+POST http://localhost:8080/rest/task/create
+Content-Type: application/json
+
+{   "id": "aTaskId",   "name": "My Task",   "description": "This have to be done very urgent",   "priority" : 30,   "assignee" : "nullptr",   "owner" : "nullptr",   "delegationState" : "PENDING",   "due" : "2014-08-30T10:00:00.000+0200",   "followUp" : "2014-08-25T10:00:00.000+0200",   "parentTaskId" : "aParentTaskId",   "caseInstanceId" : "aCaseInstanceId",   "tenantId" : null }
+
+<> 2020-04-08T042321.400.json
+
+###
+
+POST http://localhost:8080/rest/task/f4328ac6-797c-11ea-92a0-94b86dcfb2b8/complete
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/rest/task
+Content-Type: application/json
+
+<> 2020-04-08T042017.200.json
+
+###
+
+POST http://localhost:8080/rest/task/01a3662a-797d-11ea-92a0-94b86dcfb2b8/submit-form
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/rest/task
+Content-Type: application/json
+
+<> 2020-04-08T041724.200.json
+
+###
+
+GET http://localhost:8080/rest/process-instance
+Content-Type: application/json
+
+<> 2020-04-08T041646.200.json
+
+###
+
+GET http://localhost:8080/rest/process
+Content-Type: application/json
+
+<> 2020-04-08T041624.404.json
+
+###
+
+GET http://localhost:8080/rest/task/01a3662a-797d-11ea-92a0-94b86dcfb2b8
+Content-Type: application/json
+
+<> 2020-04-08T041607.200.json
+
+###
+
+GET http://localhost:8080/rest/task
+Content-Type: application/json
+
+<> 2020-04-08T041559.200.json
+
+###
+
+GET http://localhost:8080/rest/task/01a31807-797d-11ea-92a0-94b86dcfb2b8
+Content-Type: application/json
+
+<> 2020-04-08T041555-2.404.json
+
+###
+
+GET http://localhost:8080/rest/task/01a31807-797d-11ea-92a0-94b86dcfb2b8
+Content-Type: application/json
+
+<> 2020-04-08T041555-1.404.json
+
+###
+
+GET http://localhost:8080/rest/task/01a31807-797d-11ea-92a0-94b86dcfb2b8
+Content-Type: application/json
+
+<> 2020-04-08T041555.404.json
+
+###
+
+GET http://localhost:8080/rest/task/01a31807-797d-11ea-92a0-94b86dcfb2b8
+Content-Type: application/json
+
+<> 2020-04-08T041554.404.json
+
+###
+
+POST http://localhost:8080/rest/task
+Content-Type: application/json
+
+<> 2020-04-08T041408.200.json
+
+###
+
+POST http://localhost:8080/rest/task/f42ee143-797c-11ea-92a0-94b86dcfb2b8/submit-form
+Content-Type: application/json
+
+<> 2020-04-08T041352.500.json
+
+###
+
+GET http://localhost:8080/rest/process-instance
+Content-Type: application/json
+
+<> 2020-04-08T031505-1.200.json
+
+###
+

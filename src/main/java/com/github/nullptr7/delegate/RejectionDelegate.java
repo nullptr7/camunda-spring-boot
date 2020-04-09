@@ -1,12 +1,12 @@
-package com.github.nulptr7.delegate;
+package com.github.nullptr7.delegate;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import javax.inject.Named;
 
-@Named("approveTask")
-public class ApproveDelegate implements JavaDelegate {
+@Named("rejectTask")
+public class RejectionDelegate implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) {
@@ -14,6 +14,7 @@ public class ApproveDelegate implements JavaDelegate {
         String content = (String) delegateExecution.getVariable("content");
         String comments = (String) delegateExecution.getVariable("comments");
 
-        System.out.println("Message is Approved - " + content + " \ncomments: " + comments);
+        System.out.println("Message is rejected - " + content + " \ncomments: " + comments);
+
     }
 }

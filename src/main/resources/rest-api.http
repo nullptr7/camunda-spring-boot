@@ -1,0 +1,86 @@
+GET http://localhost:8080/rest/task
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/rest/process-definition
+Content-Type: application/json
+
+###
+
+// Get List of processID
+GET http://localhost:8080/rest/engine/default/process-definition?latest=true&active=true&startableInTasklist=true&startablePermissionCheck=true&firstResult=0&maxResults=15
+Content-Type: application/json
+
+###
+
+// After that submit based on the processID received
+POST http://localhost:8080/rest/engine/default/process-definition/message_demo:1:2ce5f768-7a8c-11ea-8ef9-94b86dcfb2b8/submit-form?latest=true&active=true&startableInTasklist=true&startablePermissionCheck=true&firstResult=0&maxResults=15
+Content-Type: application/json
+
+{
+  "businessKey": "sender_6",
+  "variables": {
+    "content": {
+      "value": "Some content sent by sender_6 Ishan",
+      "type": "String"
+    }
+  }
+}
+
+###
+GET http://localhost:8080/rest/task?assignee=nullptr
+
+Content-Type: application/json
+
+###
+GET http://localhost:8080/rest/task/73fae082-7a8d-11ea-8ef9-94b86dcfb2b8
+Content-Type: application/json
+
+###
+
+POST http://localhost:8080/rest/task/031dbe4e-7a98-11ea-8ef9-94b86dcfb2b8/submit-form
+Content-Type: application/json
+
+{
+  "variables": {
+    "comments": {
+      "value": "Approving this for now - Ishan"
+    },
+    "approved": {
+      "value": true
+    }
+  }
+}
+
+###
+
+GET http://localhost:8080/rest/history/detail
+Content-Type: application/json
+
+###
+
+#GET http://localhost:8080/rest/engine/default/task/a48c2054-7a8f-11ea-8ef9-94b86dcfb2b8
+#Content-Type: application/json
+#
+####
+#
+#POST http://localhost:8080/rest/engine/default/filter/56f83af0-7a8c-11ea-8ef9-94b86dcfb2b8/list?firstResult=0&maxResults=15
+#Content-Type: application/json
+#
+#{
+#  "processVariables": [],
+#  "taskVariables": [],
+#  "caseInstanceVariables": [],
+#  "firstResult": 0,
+#  "maxResults": 15,
+#  "sorting": [
+#    {
+#      "sortBy": "created",
+#      "sortOrder": "desc"
+#    }
+#  ],
+#  "active": true
+#}
+#
+####
