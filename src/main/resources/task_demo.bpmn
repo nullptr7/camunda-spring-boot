@@ -106,7 +106,7 @@
         <dc:Bounds x="785" y="262" width="50" height="50" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="749" y="280" width="21" height="14" />
-        </bpmndi:BPMNLabel>com
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0dfc6t5_di" bpmnElement="end_event">
         <dc:Bounds x="942" y="269" width="36" height="36" />
