@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_1kqzgin" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.1">
+  <decision id="message_verifier_new" name="Message Verifier">
+    <extensionElements>
+      <biodi:bounds x="150" y="150" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="Message Body" camunda:inputVariable="content">
+        <inputExpression id="inputExpression_1" typeRef="string">
+          <text>content</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="verifyOpt" name="verifyOpt" typeRef="string" />
+      <rule id="DecisionRule_1vmvw5i">
+        <inputEntry id="UnaryTests_0568h2v">
+          <text>contains(content, "TEST")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_15ha0os">
+          <text>"yellow"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1xqzc7b">
+        <inputEntry id="UnaryTests_1t183w6" expressionLanguage="feel">
+          <text>""</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_164vdyp">
+          <text>"red"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1iiv904">
+        <inputEntry id="UnaryTests_0eionc5">
+          <text>contains(content, "test")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0gmbivh">
+          <text>"yellow"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1kask28">
+        <inputEntry id="UnaryTests_1gbsj42">
+          <text>not(contains(content, "TEST"), contains(content, "test"), "")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1izmx1k">
+          <text>"green"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

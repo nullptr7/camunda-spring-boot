@@ -4,22 +4,19 @@
     <bpmn:startEvent id="start_event" name="Start">
       <bpmn:outgoing>review_flow</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="review_flow" sourceRef="start_event" targetRef="review_tasks" />
-    <bpmn:userTask id="review_tasks" name="Review Tasks" camunda:assignee="nullptr">
-      <bpmn:incoming>review_flow</bpmn:incoming>
-      <bpmn:outgoing>to_validation</bpmn:outgoing>
-    </bpmn:userTask>
+    <bpmn:sequenceFlow id="review_flow" sourceRef="start_event" targetRef="business_rule_validation" />
     <bpmn:exclusiveGateway id="gateway_validation" name="Validate Task">
       <bpmn:incoming>to_validation</bpmn:incoming>
       <bpmn:outgoing>reject_flow</bpmn:outgoing>
       <bpmn:outgoing>approve_flow</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0ojs4ld</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="to_validation" sourceRef="review_tasks" targetRef="gateway_validation" />
+    <bpmn:sequenceFlow id="to_validation" sourceRef="business_rule_validation" targetRef="gateway_validation" />
     <bpmn:sequenceFlow id="reject_flow" name="Reject" sourceRef="gateway_validation" targetRef="send_reject_repsonse">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{!approved}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${verifyOpt == 'red'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="approve_flow" name="Approve" sourceRef="gateway_validation" targetRef="send_approve_response">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{approved}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${verifyOpt == 'green'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:exclusiveGateway id="gateway_join_end" name="Join">
       <bpmn:incoming>reject_flow_join</bpmn:incoming>
@@ -34,49 +31,74 @@
     <bpmn:sequenceFlow id="end_flow" sourceRef="gateway_join_end" targetRef="end_event" />
     <bpmn:serviceTask id="send_reject_repsonse" name="Send Reject Respone" camunda:delegateExpression="#{rejectTask}">
       <bpmn:incoming>reject_flow</bpmn:incoming>
+      <bpmn:incoming>Flow_0x9b871</bpmn:incoming>
       <bpmn:outgoing>reject_flow_join</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:serviceTask id="send_approve_response" name="Send Approve Response" camunda:delegateExpression="#{approveTask}">
       <bpmn:incoming>approve_flow</bpmn:incoming>
+      <bpmn:incoming>Flow_1jalgtg</bpmn:incoming>
       <bpmn:outgoing>approve_flow_join</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0ojs4ld" name="Requires Review" sourceRef="gateway_validation" targetRef="review_message">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${verifyOpt == 'yellow'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="review_message" name="Review Message">
+      <bpmn:incoming>Flow_0ojs4ld</bpmn:incoming>
+      <bpmn:outgoing>Flow_070l1f6</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:businessRuleTask id="business_rule_validation" name="Business Rule Validation" camunda:resultVariable="verifyOpt" camunda:decisionRef="message_verifier_new" camunda:mapDecisionResult="singleEntry">
+      <bpmn:incoming>review_flow</bpmn:incoming>
+      <bpmn:outgoing>to_validation</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:exclusiveGateway id="Gateway_0mnxbbd">
+      <bpmn:incoming>Flow_070l1f6</bpmn:incoming>
+      <bpmn:outgoing>Flow_0x9b871</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1jalgtg</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_070l1f6" name="response" sourceRef="review_message" targetRef="Gateway_0mnxbbd" />
+    <bpmn:sequenceFlow id="Flow_0x9b871" name="Message Reject" sourceRef="Gateway_0mnxbbd" targetRef="send_reject_repsonse">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!approve}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1jalgtg" name="Message Approve" sourceRef="Gateway_0mnxbbd" targetRef="send_approve_response">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approve}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="message_demo">
       <bpmndi:BPMNEdge id="Flow_050miao_di" bpmnElement="end_flow">
-        <di:waypoint x="835" y="287" />
-        <di:waypoint x="942" y="287" />
+        <di:waypoint x="1225" y="287" />
+        <di:waypoint x="1452" y="287" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0zmbo5v_di" bpmnElement="approve_flow_join">
-        <di:waypoint x="690" y="430" />
-        <di:waypoint x="810" y="430" />
-        <di:waypoint x="810" y="312" />
+        <di:waypoint x="1040" y="430" />
+        <di:waypoint x="1200" y="430" />
+        <di:waypoint x="1200" y="312" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="727" y="412" width="47" height="14" />
+          <dc:Bounds x="1206" y="373" width="47" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0fs3fs0_di" bpmnElement="reject_flow_join">
-        <di:waypoint x="690" y="120" />
-        <di:waypoint x="810" y="120" />
-        <di:waypoint x="810" y="262" />
+        <di:waypoint x="1040" y="120" />
+        <di:waypoint x="1200" y="120" />
+        <di:waypoint x="1200" y="262" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="729" y="102" width="44" height="14" />
+          <dc:Bounds x="1208" y="183" width="44" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_06vtwak_di" bpmnElement="approve_flow">
         <di:waypoint x="450" y="312" />
         <di:waypoint x="450" y="430" />
-        <di:waypoint x="590" y="430" />
+        <di:waypoint x="940" y="430" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="469" y="368" width="41" height="14" />
+          <dc:Bounds x="699" y="403" width="41" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1o8zm6n_di" bpmnElement="reject_flow">
         <di:waypoint x="450" y="262" />
         <di:waypoint x="450" y="120" />
-        <di:waypoint x="590" y="120" />
+        <di:waypoint x="940" y="120" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="463" y="188" width="33" height="14" />
+          <dc:Bounds x="691" y="153" width="33" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1ryehx8_di" bpmnElement="to_validation">
@@ -87,38 +109,72 @@
         <di:waypoint x="215" y="287" />
         <di:waypoint x="270" y="287" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ojs4ld_di" bpmnElement="Flow_0ojs4ld">
+        <di:waypoint x="475" y="287" />
+        <di:waypoint x="750" y="287" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="570" y="269" width="85" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_070l1f6_di" bpmnElement="Flow_070l1f6">
+        <di:waypoint x="850" y="287" />
+        <di:waypoint x="965" y="287" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="885" y="269" width="46" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0x9b871_di" bpmnElement="Flow_0x9b871">
+        <di:waypoint x="990" y="262" />
+        <di:waypoint x="990" y="160" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1000" y="208" width="80" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jalgtg_di" bpmnElement="Flow_1jalgtg">
+        <di:waypoint x="990" y="312" />
+        <di:waypoint x="990" y="390" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="995" y="348" width="89" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="start_event">
         <dc:Bounds x="179" y="269" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="185" y="312" width="25" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_08mft2c_di" bpmnElement="review_tasks">
-        <dc:Bounds x="270" y="247" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1eq0hz7_di" bpmnElement="gateway_validation" isMarkerVisible="true">
         <dc:Bounds x="425" y="262" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="477" y="280" width="65" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_0hfdb6w_di" bpmnElement="gateway_join_end" isMarkerVisible="true">
-        <dc:Bounds x="785" y="262" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="749" y="280" width="21" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0dfc6t5_di" bpmnElement="end_event">
-        <dc:Bounds x="942" y="269" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="950" y="312" width="20" height="14" />
+          <dc:Bounds x="417" y="323" width="65" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0arym0z_di" bpmnElement="send_reject_repsonse">
-        <dc:Bounds x="590" y="80" width="100" height="80" />
+        <dc:Bounds x="940" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0hfdb6w_di" bpmnElement="gateway_join_end" isMarkerVisible="true">
+        <dc:Bounds x="1175" y="262" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1144" y="280" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0dfc6t5_di" bpmnElement="end_event">
+        <dc:Bounds x="1452" y="269" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1460" y="312" width="20" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0bbtwjg_di" bpmnElement="send_approve_response">
-        <dc:Bounds x="590" y="390" width="100" height="80" />
+        <dc:Bounds x="940" y="390" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1jpoguf_di" bpmnElement="business_rule_validation">
+        <dc:Bounds x="270" y="247" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_15b6w6y_di" bpmnElement="review_message">
+        <dc:Bounds x="750" y="247" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0mnxbbd_di" bpmnElement="Gateway_0mnxbbd" isMarkerVisible="true">
+        <dc:Bounds x="965" y="262" width="50" height="50" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

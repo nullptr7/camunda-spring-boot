@@ -14,6 +14,6 @@ public class ApproveDelegate implements JavaDelegate {
         String content = (String) delegateExecution.getVariable("content");
         String comments = (String) delegateExecution.getVariable("comments");
 
-        System.out.println("Message is Approved - " + content + " \ncomments: " + comments);
+        System.out.println("Message is Approved - " + content + " \ncomments: " + (comments == null ? "Auto Approved!" : comments));
     }
 }

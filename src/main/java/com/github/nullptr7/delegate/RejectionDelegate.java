@@ -14,7 +14,6 @@ public class RejectionDelegate implements JavaDelegate {
         String content = (String) delegateExecution.getVariable("content");
         String comments = (String) delegateExecution.getVariable("comments");
 
-        System.out.println("Message is rejected - " + content + " \ncomments: " + comments);
-
+        System.out.println("Message is rejected - " + content + " \ncomments: " + (comments == null ? "Auto Rejected!" : comments));
     }
 }
