@@ -11,5 +11,7 @@ public class Message {
 
     private String messageKey;
     private String content;
+    private boolean approved;
+    private String comments;
 
 }

@@ -15,14 +15,14 @@ Content-Type: application/json
 ###
 
 // After that submit based on the processID received
-POST http://localhost:8080/rest/engine/default/process-definition/message_demo:1:348a95aa-7d7e-11ea-af0f-94b86dcfb2b8/submit-form?latest=true&active=true&startableInTasklist=true&startablePermissionCheck=true&firstResult=0&maxResults=15
+POST http://localhost:8080/rest/engine/default/process-definition/message_demo:1:43791370-7e46-11ea-bbd6-94b86dcfb2b8/submit-form?latest=true&active=true&startableInTasklist=true&startablePermissionCheck=true&firstResult=0&maxResults=15
 Content-Type: application/json
 
 {
   "businessKey": "sender_2",
   "variables": {
     "content": {
-      "value": "This is a message from Sender 2",
+      "value": "This is a test message from Sender 2",
       "type": "String"
     }
   }
@@ -89,8 +89,28 @@ POST http://localhost:8080/message/add
 Content-Type: application/json
 
 {
-  "messageKey": "Sender 3",
-  "content": "This is a test content from sender 2"
+  "messageKey": "Sender 7",
+  "content": "This is a test content from sender 5"
+}
+
+###
+
+GET http://localhost:8080/message/unclaimed
+Content-Type: application/json
+
+###
+
+POST http://localhost:8080/message/b2e01698-7e5d-11ea-9b9a-94b86dcfb2b8/claim?userId=nullptr
+Content-Type: application/json
+
+###
+
+POST http://localhost:8080/message/b2e01698-7e5d-11ea-9b9a-94b86dcfb2b8/review
+Content-Type: application/json
+
+{
+  "approved": false,
+  "comments": "Rejected by Ishan - No idea why!"
 }
 
 ###
