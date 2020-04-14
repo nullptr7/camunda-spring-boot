@@ -6,6 +6,7 @@ import org.camunda.bpm.engine.AuthorizationException;
 import org.camunda.bpm.engine.ProcessEngineException;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.rest.dto.runtime.ProcessInstanceWithVariablesDto;
 import org.camunda.bpm.engine.rest.dto.task.TaskDto;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
@@ -24,6 +25,7 @@ import java.util.Map;
 import static com.github.nullptr7.init.MessageCommandLineRunner.getDeploymentDefinition;
 import static java.util.stream.Collectors.toList;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static org.springframework.http.ResponseEntity.accepted;
 import static org.springframework.http.ResponseEntity.ok;
 
 /**
@@ -34,7 +36,7 @@ import static org.springframework.http.ResponseEntity.ok;
 public class MessageResourceService {
 
     @PostMapping(value = "/message/add", produces = APPLICATION_JSON)
-    public ResponseEntity<String> submitMessage(@RequestBody @NonNull Message message) {
+    public ResponseEntity<?> submitMessage(@RequestBody @NonNull Message message) {
         RuntimeService service = ProcessEngines.getDefaultProcessEngine()
                                                .getRuntimeService();
 
@@ -42,8 +44,8 @@ public class MessageResourceService {
                                                .businessKey(message.getMessageKey())
                                                .setVariable("content", message.getContent())
                                                .execute();
-
-        return ok(executeResult.toString());
+        // We can write our own custom model
+        return accepted().body(ProcessInstanceWithVariablesDto.fromProcessInstance(executeResult));
     }
 
     @GetMapping(value = "/message/unclaimed", produces = APPLICATION_JSON)
@@ -63,7 +65,7 @@ public class MessageResourceService {
 
     }
 
-    @PostMapping(value = "/message/{messageId}/claim")
+    @GetMapping(value = "/message/{messageId}/claim")
     public ResponseEntity<?> assignUserToReview(@PathVariable String messageId, @QueryParam("userId") String userId) {
         String message;
 
@@ -82,7 +84,7 @@ public class MessageResourceService {
             }
         }
 
-        return ResponseEntity.ok(message);
+        return ok(message);
     }
 
     @PostMapping(value = "/message/{messageId}/review", produces = APPLICATION_JSON)
@@ -110,6 +112,6 @@ public class MessageResourceService {
 
         }
 
-        return ResponseEntity.ok(response);
+        return ok(response);
     }
 }
